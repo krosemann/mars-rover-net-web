@@ -15,11 +15,12 @@ public sealed class MarsRover(Coordinates coordinates, Direction direction)
 
     private MarsRover Move(ForwardOrBackward forwardOrBackward) =>
         new(
-            Coordinates.Translate(
-                Delta().Multiply(forwardOrBackward == ForwardOrBackward.Forward ? 1 : -1)
-            ),
+            Coordinates.Translate(EffectiveDelta(forwardOrBackward)),
             Direction
         );
+
+    private (int x, int y) EffectiveDelta(ForwardOrBackward forwardOrBackward) =>
+        Delta() * (forwardOrBackward == ForwardOrBackward.Forward ? 1 : -1);
 
     private (int x, int y) Delta() => Direction switch
     {
