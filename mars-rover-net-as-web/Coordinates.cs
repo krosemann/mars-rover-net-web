@@ -5,5 +5,5 @@ public sealed class Coordinates(int x, int y)
     public int X { get; } = x;
     public int Y { get; } = y;
 
-    public Coordinates Translate((int x, int y) delta) => new Coordinates(X + delta.x, Y + delta.y);
+    public Coordinates Translate((int x, int y) delta) => new(X + delta.x, Y + delta.y);
 }

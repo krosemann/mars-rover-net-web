@@ -10,17 +10,14 @@ public sealed class MarsRover(Coordinates coordinates, Direction direction)
 
     public Direction Direction { get; } = direction;
 
-    public MarsRover MoveForward() => Move(ForwardOrBackward.Forward);
-    public MarsRover MoveBackward() => Move(ForwardOrBackward.Backward);
-
-    private MarsRover Move(ForwardOrBackward forwardOrBackward) =>
+    public MarsRover Move(MoveDirection moveDirection) =>
         new(
-            Coordinates.Translate(EffectiveDelta(forwardOrBackward)),
+            Coordinates.Translate(EffectiveDelta(moveDirection)),
             Direction
         );
 
-    private (int x, int y) EffectiveDelta(ForwardOrBackward forwardOrBackward) =>
-        Delta() * (forwardOrBackward == ForwardOrBackward.Forward ? 1 : -1);
+    private (int x, int y) EffectiveDelta(MoveDirection moveDirection) =>
+        Delta() * (moveDirection == MoveDirection.Forward ? 1 : -1);
 
     private (int x, int y) Delta() => Direction switch
     {
@@ -30,10 +27,10 @@ public sealed class MarsRover(Coordinates coordinates, Direction direction)
         Direction.West => (-1, 0),
         _ => throw new ArgumentOutOfRangeException()
     };
+}
 
-    private enum ForwardOrBackward
-    {
-        Forward,
-        Backward
-    }
+public enum MoveDirection
+{
+    Forward,
+    Backward
 }

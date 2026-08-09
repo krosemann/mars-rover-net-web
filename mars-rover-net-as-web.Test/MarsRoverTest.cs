@@ -14,7 +14,7 @@ public class Tests
         int expectedY
     )
     {
-        var rover = new MarsRover(startX, startY, startDirection).MoveForward();
+        var rover = new MarsRover(startX, startY, startDirection).Move(MoveDirection.Forward);
 
         Assert.Multiple(() =>
             {
@@ -36,7 +36,7 @@ public class Tests
         int expectedY
     )
     {
-        var rover = new MarsRover(startX, startY, startDirection).MoveBackward();
+        var rover = new MarsRover(startX, startY, startDirection).Move(MoveDirection.Backward);
 
         Assert.Multiple(() =>
             {
