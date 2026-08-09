@@ -1,9 +1,6 @@
 ﻿namespace mars_rover_net_as_web;
 
-public sealed class Coordinates(int x, int y)
+public record Coordinates(int X, int Y)
 {
-    public int X { get; } = x;
-    public int Y { get; } = y;
-
     public Coordinates Translate((int x, int y) delta) => new(X + delta.x, Y + delta.y);
 }

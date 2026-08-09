@@ -1,6 +1,6 @@
 ﻿namespace mars_rover_net_as_web.Test;
 
-public class Tests
+public sealed class MarsRoverTest
 {
     [TestCase(1, 1, Orientation.North, 1, 2)]
     [TestCase(2, 3, Orientation.East, 3, 3)]
@@ -18,12 +18,12 @@ public class Tests
 
         Assert.Multiple(() =>
             {
-                Assert.That((rover.X, rover.Y), Is.EqualTo((expectedX, expectedY)));
+                Assert.That(rover.Coordinates, Is.EqualTo(new Coordinates(expectedX, expectedY)));
                 Assert.That(rover.Orientation, Is.EqualTo(startOrientation));
             }
         );
     }
-    
+
     [TestCase(1, 1, Orientation.North, 1, 0)]
     [TestCase(2, 3, Orientation.East, 1, 3)]
     [TestCase(5, 8, Orientation.South, 5, 9)]
@@ -40,7 +40,7 @@ public class Tests
 
         Assert.Multiple(() =>
             {
-                Assert.That((rover.X, rover.Y), Is.EqualTo((expectedX, expectedY)));
+                Assert.That(rover.Coordinates, Is.EqualTo(new Coordinates(expectedX, expectedY)));
                 Assert.That(rover.Orientation, Is.EqualTo(startOrientation));
             }
         );
