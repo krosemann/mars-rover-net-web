@@ -7,7 +7,7 @@ app.UseHttpsRedirection();
 
 app.MapGet(
         "/mars-rover",
-        () => new MarsRover(1, 1, Direction.North)
+        () => new MarsRover(1, 1, Orientation.North)
     )
     .WithName("MarsRover");
 

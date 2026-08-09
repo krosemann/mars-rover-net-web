@@ -1,30 +1,30 @@
 ﻿namespace mars_rover_net_as_web;
 
-public sealed class MarsRover(Coordinates coordinates, Direction direction)
+public sealed class MarsRover(Coordinates coordinates, Orientation orientation)
 {
-    public MarsRover(int x, int y, Direction direction) : this(new Coordinates(x, y), direction) { }
+    public MarsRover(int x, int y, Orientation orientation) : this(new Coordinates(x, y), orientation) { }
 
     public Coordinates Coordinates { get; } = coordinates;
     public int X => Coordinates.X;
     public int Y => Coordinates.Y;
 
-    public Direction Direction { get; } = direction;
+    public Orientation Orientation { get; } = orientation;
 
     public MarsRover Move(MoveDirection moveDirection) =>
         new(
             Coordinates.Translate(EffectiveDelta(moveDirection)),
-            Direction
+            Orientation
         );
 
     private (int x, int y) EffectiveDelta(MoveDirection moveDirection) =>
         Delta() * (moveDirection == MoveDirection.Forward ? 1 : -1);
 
-    private (int x, int y) Delta() => Direction switch
+    private (int x, int y) Delta() => Orientation switch
     {
-        Direction.North => (0, 1),
-        Direction.East => (1, 0),
-        Direction.South => (0, -1),
-        Direction.West => (-1, 0),
+        Orientation.North => (0, 1),
+        Orientation.East => (1, 0),
+        Orientation.South => (0, -1),
+        Orientation.West => (-1, 0),
         _ => throw new ArgumentOutOfRangeException()
     };
 }
