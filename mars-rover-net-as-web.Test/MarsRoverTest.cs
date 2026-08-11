@@ -1,4 +1,6 @@
-﻿namespace mars_rover_net_as_web.Test;
+﻿using mars_rover_net_as_web.Commands;
+
+namespace mars_rover_net_as_web.Test;
 
 public sealed class MarsRoverTest
 {
@@ -14,12 +16,13 @@ public sealed class MarsRoverTest
         int expectedY
     )
     {
-        var rover = new MarsRover(startX, startY, startOrientation).Move(MoveDirection.Forward);
+        var initialPosition = new MarsRover(startX, startY, startOrientation);
+        var finalPosition = new MoveForward().Apply(initialPosition);
 
         Assert.Multiple(() =>
             {
-                Assert.That(rover.Coordinates, Is.EqualTo(new Coordinates(expectedX, expectedY)));
-                Assert.That(rover.Orientation, Is.EqualTo(startOrientation));
+                Assert.That(finalPosition.Coordinates, Is.EqualTo(new Coordinates(expectedX, expectedY)));
+                Assert.That(finalPosition.Orientation, Is.EqualTo(startOrientation));
             }
         );
     }
@@ -36,12 +39,13 @@ public sealed class MarsRoverTest
         int expectedY
     )
     {
-        var rover = new MarsRover(startX, startY, startOrientation).Move(MoveDirection.Backward);
+        var initialPosition = new MarsRover(startX, startY, startOrientation);
+        var finalPosition = new MoveBackward().Apply(initialPosition);
 
         Assert.Multiple(() =>
             {
-                Assert.That(rover.Coordinates, Is.EqualTo(new Coordinates(expectedX, expectedY)));
-                Assert.That(rover.Orientation, Is.EqualTo(startOrientation));
+                Assert.That(finalPosition.Coordinates, Is.EqualTo(new Coordinates(expectedX, expectedY)));
+                Assert.That(finalPosition.Orientation, Is.EqualTo(startOrientation));
             }
         );
     }

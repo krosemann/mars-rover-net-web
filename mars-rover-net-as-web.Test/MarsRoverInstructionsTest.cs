@@ -1,4 +1,4 @@
-﻿using static mars_rover_net_as_web.Commands;
+﻿using static mars_rover_net_as_web.MarsRoverInstructions;
 
 namespace mars_rover_net_as_web.Test;
 
