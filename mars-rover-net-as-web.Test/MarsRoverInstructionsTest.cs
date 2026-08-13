@@ -21,12 +21,7 @@ public sealed class MarsRoverInstructionsTest
         var initialPosition = new MarsRover(startX, startY, startOrientation);
         var finalState = new CommandsFromStrings(commands).Value.ExecutedFrom(initialPosition);
 
-        Assert.Multiple(() =>
-            {
-                Assert.That(finalState.Coordinates, Is.EqualTo(new Coordinates(expectedX, expectedY)));
-                Assert.That(finalState.Orientation, Is.EqualTo(startOrientation));
-            }
-        );
+        Assert.That(finalState, Is.EqualTo(new MarsRover(expectedX, expectedY, startOrientation)));
     }
 
     [TestCase(Orientation.North, TURN_RIGHT)]

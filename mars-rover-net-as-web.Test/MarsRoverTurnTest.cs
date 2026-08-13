@@ -11,7 +11,7 @@ public sealed class MarsRoverTurnTest
     public void TurnsRight_Once(Orientation initialOrientation, Orientation endOrientation)
     {
         var initialCoordinates = new Coordinates(1, 1);
-        var finalPosition = new TurnRight().Apply(new MarsRover(initialCoordinates, initialOrientation));
+        var finalPosition = new TurnRight().AppliedTo(new MarsRover(initialCoordinates, initialOrientation));
 
         Assert.Multiple(() =>
             {
@@ -28,7 +28,7 @@ public sealed class MarsRoverTurnTest
     public void TurnsLeft_Once(Orientation initialOrientation, Orientation endOrientation)
     {
         var initialCoordinates = new Coordinates(1, 1);
-        var finalPosition = new TurnLeft().Apply(new MarsRover(initialCoordinates, initialOrientation));
+        var finalPosition = new TurnLeft().AppliedTo(new MarsRover(initialCoordinates, initialOrientation));
 
         Assert.Multiple(() =>
             {

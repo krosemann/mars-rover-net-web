@@ -2,7 +2,7 @@
 
 public sealed class MoveForward : Command
 {
-    public MarsRover Apply(MarsRover rover) =>
+    public MarsRover AppliedTo(MarsRover rover) =>
         new(
             rover.Coordinates.Translate(MovementDelta.Delta(rover.Orientation)),
             rover.Orientation
@@ -11,7 +11,7 @@ public sealed class MoveForward : Command
 
 public sealed class MoveBackward : Command
 {
-    public MarsRover Apply(MarsRover rover) =>
+    public MarsRover AppliedTo(MarsRover rover) =>
         new(
             rover.Coordinates.Translate(MovementDelta.Delta(rover.Orientation).Inverted()),
             rover.Orientation

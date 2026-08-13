@@ -2,7 +2,7 @@
 
 public interface Command
 {
-    MarsRover Apply(MarsRover rover);
+    MarsRover AppliedTo(MarsRover rover);
 }
 
 public static class CommandExtensions
@@ -16,7 +16,7 @@ public static class CommandExtensions
         foreach (var command in commands)
         {
             var current = marsRoverStates.Last();
-            marsRoverStates.Add(command.Apply(current));
+            marsRoverStates.Add(command.AppliedTo(current));
         }
 
         return marsRoverStates.AsReadOnly();

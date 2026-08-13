@@ -17,14 +17,9 @@ public sealed class MarsRoverMovementTest
     )
     {
         var finalPosition = new MoveForward()
-            .Apply(new MarsRover(startX, startY, startOrientation));
+            .AppliedTo(new MarsRover(startX, startY, startOrientation));
 
-        Assert.Multiple(() =>
-            {
-                Assert.That(finalPosition.Coordinates, Is.EqualTo(new Coordinates(expectedX, expectedY)));
-                Assert.That(finalPosition.Orientation, Is.EqualTo(startOrientation));
-            }
-        );
+        Assert.That(finalPosition, Is.EqualTo(new MarsRover(expectedX, expectedY, startOrientation)));
     }
 
     [TestCase(1, 1, Orientation.North, 1, 0)]
@@ -40,13 +35,8 @@ public sealed class MarsRoverMovementTest
     )
     {
         var finalPosition = new MoveBackward()
-            .Apply(new MarsRover(startX, startY, startOrientation));
+            .AppliedTo(new MarsRover(startX, startY, startOrientation));
 
-        Assert.Multiple(() =>
-            {
-                Assert.That(finalPosition.Coordinates, Is.EqualTo(new Coordinates(expectedX, expectedY)));
-                Assert.That(finalPosition.Orientation, Is.EqualTo(startOrientation));
-            }
-        );
+        Assert.That(finalPosition, Is.EqualTo(new MarsRover(expectedX, expectedY, startOrientation)));
     }
 }

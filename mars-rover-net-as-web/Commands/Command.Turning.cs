@@ -2,7 +2,7 @@
 
 public sealed class TurnRight : Command
 {
-    public MarsRover Apply(MarsRover rover) => rover with
+    public MarsRover AppliedTo(MarsRover rover) => rover with
     {
         Orientation = rover.Orientation switch
         {
@@ -18,7 +18,7 @@ public sealed class TurnRight : Command
 
 public sealed class TurnLeft : Command
 {
-    public MarsRover Apply(MarsRover rover) => rover with
+    public MarsRover AppliedTo(MarsRover rover) => rover with
     {
         Orientation = rover.Orientation switch
         {
