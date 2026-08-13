@@ -1,7 +1,7 @@
 ﻿# TODO
 
-- Sequence tests (movement + turning)
 - Map
+- Property Based Testing
 - Wrapping
 - Obstacles/Collision
 - Lazy evaluate multiple instructions (i.e. only once)

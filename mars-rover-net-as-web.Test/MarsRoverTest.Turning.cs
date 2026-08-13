@@ -1,4 +1,5 @@
 ﻿using mars_rover_net_as_web.Commands;
+using static mars_rover_net_as_web.Test.CommandsFromStrings;
 
 namespace mars_rover_net_as_web.Test;
 
@@ -20,7 +21,7 @@ public sealed class MarsRoverTurnTest
             }
         );
     }
-    
+
     [TestCase(Orientation.North, Orientation.West)]
     [TestCase(Orientation.West, Orientation.South)]
     [TestCase(Orientation.South, Orientation.East)]
@@ -36,5 +37,22 @@ public sealed class MarsRoverTurnTest
                 Assert.That(finalPosition.Coordinates, Is.EqualTo(initialCoordinates));
             }
         );
+    }
+
+    [TestCase(Orientation.North, TURN_RIGHT)]
+    [TestCase(Orientation.North, TURN_LEFT)]
+    [TestCase(Orientation.East, TURN_RIGHT)]
+    [TestCase(Orientation.East, TURN_LEFT)]
+    [TestCase(Orientation.South, TURN_RIGHT)]
+    [TestCase(Orientation.South, TURN_LEFT)]
+    [TestCase(Orientation.West, TURN_RIGHT)]
+    [TestCase(Orientation.West, TURN_LEFT)]
+    public void FourTurns_ReturnIdentity(Orientation orientation, string command)
+    {
+        var initialPosition = new MarsRover(1, 1, orientation);
+        var instructions = new CommandsFromStrings(Enumerable.Repeat(command, 4)).Value;
+        var finalPosition = instructions.ExecutedFrom(initialPosition);
+
+        Assert.That(finalPosition, Is.EqualTo(initialPosition));
     }
 }
