@@ -1,6 +1,6 @@
 ﻿# TODO
 
-- Turning
+- Sequence tests (movement + turning)
 - Map
 - Wrapping
 - Obstacles/Collision

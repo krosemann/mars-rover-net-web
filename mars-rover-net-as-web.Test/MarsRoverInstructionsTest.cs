@@ -1,4 +1,5 @@
-﻿using static mars_rover_net_as_web.MarsRoverInstructions;
+﻿using mars_rover_net_as_web.Commands;
+using static mars_rover_net_as_web.Test.CommandsFromStrings;
 
 namespace mars_rover_net_as_web.Test;
 
@@ -17,10 +18,8 @@ public sealed class MarsRoverInstructionsTest
         int expectedY
     )
     {
-        var finalState = new MarsRoverInstructions(
-            new MarsRover(startX, startY, startOrientation),
-            commands
-        ).FinalState();
+        var initialPosition = new MarsRover(startX, startY, startOrientation);
+        var finalState = new CommandsFromStrings(commands).Value.ExecutedFrom(initialPosition);
 
         Assert.Multiple(() =>
             {
@@ -28,5 +27,22 @@ public sealed class MarsRoverInstructionsTest
                 Assert.That(finalState.Orientation, Is.EqualTo(startOrientation));
             }
         );
+    }
+
+    [TestCase(Orientation.North, TURN_RIGHT)]
+    [TestCase(Orientation.North, TURN_LEFT)]
+    [TestCase(Orientation.East, TURN_RIGHT)]
+    [TestCase(Orientation.East, TURN_LEFT)]
+    [TestCase(Orientation.South, TURN_RIGHT)]
+    [TestCase(Orientation.South, TURN_LEFT)]
+    [TestCase(Orientation.West, TURN_RIGHT)]
+    [TestCase(Orientation.West, TURN_LEFT)]
+    public void FourTurns_ReturnIdentity(Orientation orientation, string command)
+    {
+        var initialPosition = new MarsRover(1, 1, orientation);
+        var instructions = new CommandsFromStrings(Enumerable.Repeat(command, 4)).Value;
+        var finalPosition = instructions.ExecutedFrom(initialPosition);
+
+        Assert.That(finalPosition, Is.EqualTo(initialPosition));
     }
 }

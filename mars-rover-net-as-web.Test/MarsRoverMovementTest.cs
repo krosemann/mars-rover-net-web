@@ -2,7 +2,7 @@
 
 namespace mars_rover_net_as_web.Test;
 
-public sealed class MarsRoverTest
+public sealed class MarsRoverMovementTest
 {
     [TestCase(1, 1, Orientation.North, 1, 2)]
     [TestCase(2, 3, Orientation.East, 3, 3)]
@@ -16,8 +16,8 @@ public sealed class MarsRoverTest
         int expectedY
     )
     {
-        var initialPosition = new MarsRover(startX, startY, startOrientation);
-        var finalPosition = new MoveForward().Apply(initialPosition);
+        var finalPosition = new MoveForward()
+            .Apply(new MarsRover(startX, startY, startOrientation));
 
         Assert.Multiple(() =>
             {
@@ -39,8 +39,8 @@ public sealed class MarsRoverTest
         int expectedY
     )
     {
-        var initialPosition = new MarsRover(startX, startY, startOrientation);
-        var finalPosition = new MoveBackward().Apply(initialPosition);
+        var finalPosition = new MoveBackward()
+            .Apply(new MarsRover(startX, startY, startOrientation));
 
         Assert.Multiple(() =>
             {
